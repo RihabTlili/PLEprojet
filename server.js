@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
-const HBase = require('hbase-client');
+const HBaseclient = require('hbase-client');
+const hbase = require('hbase');
 const request = require('request');
 /*const client = HBase.create({
   zookeeperHosts: [
@@ -13,12 +14,14 @@ app.get('/', function (req, res) {
   res.send('Hello World!')
 })
 
-request('http://10.0.8.3:16010/AnnaChu2',
-function (error, response, body) {
-console.log('error:', error);
-console.log('statusCode:', response && response.statusCode);
-console.log('body:', body);
-});
+var client = HBaseclient({
+   zookeeperHosts: ['beetlejuice:16010'],
+   zookeeperRoot: '/hbase',
+   rootRegionZKPath: '/meta-region-server',
+   rpcTimeout: 30000,
+   pingTimeout: 30000,
+   callTimeout: 5000
+ });
 /*var assert = require('assert');
 var hbase = require('hbase');
 
@@ -34,7 +37,7 @@ hbase({ host: '10.0.8.3', port: 16010 })
       });
     });
   });
-});*/
+});
 
 /*client.putRow('testRihab', 'rowkey1', {'f1:name': 'foo name', 'f1:age': '18'}, function (err) {
   console.log(err);
