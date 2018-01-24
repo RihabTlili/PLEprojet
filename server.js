@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const HBaseclient = require('hbase-client');
-const hbase = require('hbase');
+const hbase = require('hbase-rpc-client');
 const request = require('request');
 /*const client = HBase.create({
   zookeeperHosts: [
@@ -11,17 +11,24 @@ const request = require('request');
 });*/
 
 app.get('/', function (req, res) {
-  res.send('Hello World!')
+  res.send('Hello World!');
 })
 
-var client = HBaseclient({
-   zookeeperHosts: ['beetlejuice:16010'],
-   zookeeperRoot: '/hbase',
-   rootRegionZKPath: '/meta-region-server',
-   rpcTimeout: 30000,
-   pingTimeout: 30000,
-   callTimeout: 5000
- });
+var client = hbase({
+    zookeeperHosts: ['10.0.8.3:16010'],
+    zookeeperRoot: '/opt/mapr/hbase/hbase-0.98.12',
+    rootRegionZKPath: '/root-region-server',
+    rpcTimeout: 30000,
+    pingTimeout: 30000,
+    callTimeout: 5000
+});
+
+client.on('error', function(err) {
+  console.log(err)
+})
+
+
+
 /*var assert = require('assert');
 var hbase = require('hbase');
 
@@ -37,14 +44,15 @@ hbase({ host: '10.0.8.3', port: 16010 })
       });
     });
   });
-});
+});*/
 
-/*client.putRow('testRihab', 'rowkey1', {'f1:name': 'foo name', 'f1:age': '18'}, function (err) {
+/*
+client.putRow('testRihab', 'rowkey1', {'f1:name': 'foo name', 'f1:age': '18'}, function (err) {
   console.log(err);
 });
 client .getRow ( ' testRihab ' , ' rowkey1 ' , [ ' f1: nom ' , ' f1: age ' ] , function (err , row) {
   console.log ( row ) ;
-} ) ; */
+} ) ;*/
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!')
 })
