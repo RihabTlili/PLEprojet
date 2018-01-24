@@ -1,0 +1,22 @@
+{
+  "name": "pleproject",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RihabTlili/PLEprojet.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RihabTlili/PLEprojet/issues"
+  },
+  "homepage": "https://github.com/RihabTlili/PLEprojet#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
