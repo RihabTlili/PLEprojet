@@ -22,6 +22,7 @@
     "hbase-client": "^1.6.1",
     "hbase-rpc-client": "^0.1.14",
     "node-hbase-thrift2": "^0.9.5",
+    "readable-stream": "^2.3.3",
     "request": "^2.83.0"
   }
 }
